@@ -43,8 +43,8 @@ def tokenize(df):
     for ut in df['text']:
         tokenized.append(sent_tokenize(ut))
         
-    df['new_lista'] = tokenized
-    df = df.explode('new_lista')
+    df['new_text'] = tokenized
+    df = df.explode('new_text')
     df = df.reset_index(drop=True)
 
     return df

@@ -42,7 +42,7 @@ def da_indicators(df):
     #repair is what comes after the repair initiator
     request_summary = ['correct?','confirm'] #when you ask an information to be confirmed
     confirmation = ['yes','correct.','correct ', 'that\'s it', 'indeed'] #confirmation é a resposta que confirma: ex yes | correct | that's it
-    sentence_closer = ['awesome','great','perfect','exactly','that\'s all', 'thanks', 'okay', 'thank you'] 
+    sentence_closer = ['awesome','great','perfect','exactly','that\'s all', 'thanks', 'thank you'] 
     question = ['\?']
     receipt = ['You are welcome', 'you\'re welcome']
 
@@ -77,7 +77,7 @@ def main(argv=None):
     # df_sent = sentence_ut(df)
     df_final = da_indicators(df)
 
-    print(df_final.head())
+    # print(df_final.head())
     df_final.to_csv('./data_TM2/processed_utterances_sentence_DA_labeling.csv')
     return df_final
 
@@ -85,4 +85,4 @@ if __name__ == '__main__':
     main()
 
 #type in the terminal
-#python3 preprocessing.py ./data_TM2/processed_utterances_all_tasks_TESTE2.csv
+#python3 DA_labeling.py ./data_TM2/processed_utterances_all_tasks.csv
