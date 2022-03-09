@@ -1,0 +1,71 @@
+,all_DA
+['grant'],367
+['answer'],332
+"['sequence_closer', 'grant']",144
+"['partial_request', 'grant']",109
+"['detail_request', 'answer']",104
+"['confirmation', 'grant']",95
+"['confirmation', 'sequence_closer', 'answer']",94
+"['confirmation', 'sequence_closer', 'grant']",88
+"['greeting', 'grant']",85
+"['greeting', 'answer']",80
+"['greeting', 'detail_request', 'answer']",75
+"['confirmation', 'answer']",65
+"['sequence_closer', 'answer']",63
+"['repair_initiator', 'detail_request', 'answer']",51
+"['repair_initiator', 'partial_request', 'grant']",40
+"['hold_request', 'answer']",30
+"['greeting', 'partial_request', 'grant']",26
+"['greeting', 'completion_check', 'detail_request', 'answer']",19
+"['receipt', 'answer']",15
+"['confirmation', 'sequence_closer', 'detail_request', 'answer']",14
+"['greeting', 'confirmation', 'sequence_closer', 'answer']",12
+"['repair_initiator', 'answer']",12
+"['repair_initiator', 'grant']",11
+"['repair_initiator', 'confirmation', 'sequence_closer', 'detail_request', 'answer']",11
+"['greeting', 'confirmation', 'answer']",10
+"['greeting', 'confirmation', 'completion_check', 'detail_request', 'answer']",8
+"['confirmation', 'detail_request', 'answer']",7
+"['disconfirmation', 'answer']",6
+"['greeting', 'confirmation', 'sequence_closer', 'completion_check', 'detail_request', 'answer']",5
+"['repair_initiator', 'greeting', 'partial_request', 'grant']",5
+"['confirmation', 'sequence_closer', 'partial_request', 'grant']",5
+"['greeting', 'sequence_closer', 'grant']",4
+"['greeting', 'confirmation', 'grant']",4
+"['repair_initiator', 'greeting', 'detail_request', 'answer']",4
+"['greeting', 'confirmation', 'sequence_closer', 'detail_request', 'answer']",4
+"['repair_initiator', 'hold_request', 'answer']",3
+"['confirmation', 'sequence_closer', 'completion_check', 'detail_request', 'answer']",3
+"['completion_check', 'detail_request', 'answer']",3
+"['greeting', 'confirmation', 'sequence_closer', 'partial_request', 'grant']",3
+"['repair_initiator', 'confirmation', 'detail_request', 'answer']",3
+"['repair_initiator', 'confirmation', 'sequence_closer', 'partial_request', 'grant']",3
+"['repair_initiator', 'greeting', 'grant']",3
+"['confirmation', 'receipt', 'sequence_closer', 'answer']",2
+"['receipt', 'sequence_closer', 'answer']",2
+"['repair_initiator', 'sequence_closer', 'answer']",2
+"['greeting', 'sequence_closer', 'answer']",2
+"['sequence_closer', 'partial_request', 'grant']",2
+"['request_summary', 'confirmation', 'grant']",2
+"['disconfirmation', 'grant']",2
+"['greeting', 'confirmation', 'detail_request', 'answer']",2
+"['sequence_closer', 'detail_request', 'answer']",2
+"['repair_initiator', 'receipt', 'sequence_closer', 'answer']",1
+"['greeting', 'confirmation', 'sequence_closer', 'grant']",1
+"['confirmation', 'hold_request', 'answer']",1
+"['repair_initiator', 'sequence_closer', 'grant']",1
+"['confirmation', 'disconfirmation', 'sequence_closer', 'hold_request', 'answer']",1
+"['repair_initiator', 'greeting', 'confirmation', 'answer']",1
+"['repair_initiator', 'confirmation', 'partial_request', 'grant']",1
+"['greeting', 'hold_request', 'answer']",1
+"['repair_initiator', 'confirmation', 'sequence_closer', 'answer']",1
+"['greeting', 'disconfirmation', 'answer']",1
+"['request_summary', 'confirmation', 'answer']",1
+"['hold_request', 'detail_request', 'answer']",1
+"['receipt', 'grant']",1
+"['repair_initiator', 'confirmation', 'disconfirmation', 'detail_request', 'answer']",1
+"['confirmation', 'disconfirmation', 'sequence_closer', 'partial_request', 'grant']",1
+"['request_summary', 'answer']",1
+"['repair_initiator', 'confirmation', 'answer']",1
+"['request_summary', 'detail_request', 'answer']",1
+"['confirmation', 'disconfirmation', 'sequence_closer', 'answer']",1
