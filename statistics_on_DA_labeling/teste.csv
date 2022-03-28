@@ -1,0 +1,76 @@
+,all_DA
+[],202285
+['question'],84709
+['greeting'],52667
+['sentence_closer'],37544
+"['greeting', 'question']",21125
+['confirmation'],14069
+['grant'],6429
+['receipt'],3751
+"['greeting', 'sentence_closer']",1816
+"['greeting', 'grant']",1806
+['repair_initiator'],1116
+"['repair_initiator', 'question']",1030
+"['request_summary', 'confirmation']",1029
+"['question', 'sentence_closer']",939
+"['greeting', 'confirmation']",852
+"['grant', 'question']",784
+"['request_summary', 'confirmation', 'question']",664
+['request_summary'],628
+"['greeting', 'receipt']",512
+"['greeting', 'grant', 'question']",420
+"['confirmation', 'question']",385
+"['confirmation', 'sentence_closer']",323
+"['confirmation', 'grant']",290
+"['greeting', 'question', 'sentence_closer']",277
+"['grant', 'sentence_closer']",254
+"['request_summary', 'question']",201
+"['repair_initiator', 'greeting']",139
+"['receipt', 'sentence_closer']",112
+"['greeting', 'request_summary']",96
+"['greeting', 'grant', 'sentence_closer']",75
+"['greeting', 'request_summary', 'confirmation', 'question']",71
+"['request_summary', 'grant']",53
+"['greeting', 'request_summary', 'question']",47
+"['greeting', 'confirmation', 'question']",42
+"['repair_initiator', 'greeting', 'question']",41
+"['request_summary', 'sentence_closer']",37
+"['repair_initiator', 'grant']",26
+"['greeting', 'confirmation', 'sentence_closer']",25
+"['greeting', 'request_summary', 'confirmation']",22
+"['receipt', 'question']",18
+"['greeting', 'receipt', 'question']",17
+"['repair_initiator', 'sentence_closer']",14
+"['greeting', 'receipt', 'sentence_closer']",13
+"['greeting', 'request_summary', 'grant']",13
+"['request_summary', 'confirmation', 'sentence_closer']",12
+"['greeting', 'confirmation', 'grant']",11
+"['repair_initiator', 'confirmation']",10
+"['greeting', 'request_summary', 'confirmation', 'grant', 'question']",9
+"['request_summary', 'confirmation', 'grant', 'question']",9
+"['request_summary', 'receipt']",8
+"['greeting', 'grant', 'question', 'sentence_closer']",8
+"['request_summary', 'confirmation', 'question', 'sentence_closer']",8
+"['grant', 'question', 'sentence_closer']",6
+"['repair_initiator', 'request_summary', 'confirmation', 'question']",5
+"['confirmation', 'grant', 'question']",4
+"['repair_initiator', 'request_summary', 'confirmation']",3
+"['receipt', 'grant']",2
+"['repair_initiator', 'question', 'sentence_closer']",2
+"['repair_initiator', 'greeting', 'sentence_closer']",2
+"['repair_initiator', 'greeting', 'confirmation']",2
+"['request_summary', 'question', 'sentence_closer']",2
+"['repair_initiator', 'receipt']",1
+"['request_summary', 'grant', 'sentence_closer']",1
+"['repair_initiator', 'greeting', 'grant', 'question']",1
+"['greeting', 'confirmation', 'grant', 'question']",1
+"['greeting', 'request_summary', 'question', 'sentence_closer']",1
+"['repair_initiator', 'grant', 'question']",1
+"['greeting', 'request_summary', 'confirmation', 'grant']",1
+"['repair_initiator', 'greeting', 'grant']",1
+"['request_summary', 'confirmation', 'grant']",1
+"['greeting', 'request_summary', 'grant', 'question']",1
+"['greeting', 'confirmation', 'question', 'sentence_closer']",1
+"['greeting', 'request_summary', 'sentence_closer']",1
+"['repair_initiator', 'greeting', 'request_summary', 'confirmation', 'grant', 'question']",1
+"['greeting', 'request_summary', 'confirmation', 'question', 'sentence_closer']",1

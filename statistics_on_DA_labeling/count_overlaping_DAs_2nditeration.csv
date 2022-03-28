@@ -1,0 +1,71 @@
+,all_DA
+['partial_request'],367
+[],332
+"['sequence_closer', 'partial_request']",144
+"['partial_request', 'partial_request']",109
+['detail_request'],104
+"['confirmation', 'partial_request']",95
+"['confirmation', 'sequence_closer']",94
+"['confirmation', 'sequence_closer', 'partial_request']",88
+"['greeting', 'partial_request']",85
+['greeting'],80
+"['greeting', 'detail_request']",75
+['confirmation'],65
+['sequence_closer'],63
+"['repair_initiator', 'detail_request']",51
+"['repair_initiator', 'partial_request', 'partial_request']",40
+['hold_request'],30
+"['greeting', 'partial_request', 'partial_request']",26
+"['greeting', 'completion_check', 'detail_request']",19
+['receipt'],15
+"['confirmation', 'sequence_closer', 'detail_request']",14
+"['greeting', 'confirmation', 'sequence_closer']",12
+['repair_initiator'],12
+"['repair_initiator', 'partial_request']",11
+"['repair_initiator', 'confirmation', 'sequence_closer', 'detail_request']",11
+"['greeting', 'confirmation']",10
+"['greeting', 'confirmation', 'completion_check', 'detail_request']",8
+"['confirmation', 'detail_request']",7
+['disconfirmation'],6
+"['greeting', 'confirmation', 'sequence_closer', 'completion_check', 'detail_request']",5
+"['repair_initiator', 'greeting', 'partial_request', 'partial_request']",5
+"['confirmation', 'sequence_closer', 'partial_request', 'partial_request']",5
+"['greeting', 'sequence_closer', 'partial_request']",4
+"['greeting', 'confirmation', 'partial_request']",4
+"['repair_initiator', 'greeting', 'detail_request']",4
+"['greeting', 'confirmation', 'sequence_closer', 'detail_request']",4
+"['repair_initiator', 'hold_request']",3
+"['confirmation', 'sequence_closer', 'completion_check', 'detail_request']",3
+"['completion_check', 'detail_request']",3
+"['greeting', 'confirmation', 'sequence_closer', 'partial_request', 'partial_request']",3
+"['repair_initiator', 'confirmation', 'detail_request']",3
+"['repair_initiator', 'confirmation', 'sequence_closer', 'partial_request', 'partial_request']",3
+"['repair_initiator', 'greeting', 'partial_request']",3
+"['confirmation', 'receipt', 'sequence_closer']",2
+"['receipt', 'sequence_closer']",2
+"['repair_initiator', 'sequence_closer']",2
+"['greeting', 'sequence_closer']",2
+"['sequence_closer', 'partial_request', 'partial_request']",2
+"['request_summary', 'confirmation', 'partial_request']",2
+"['disconfirmation', 'partial_request']",2
+"['greeting', 'confirmation', 'detail_request']",2
+"['sequence_closer', 'detail_request']",2
+"['repair_initiator', 'receipt', 'sequence_closer']",1
+"['greeting', 'confirmation', 'sequence_closer', 'partial_request']",1
+"['confirmation', 'hold_request']",1
+"['repair_initiator', 'sequence_closer', 'partial_request']",1
+"['confirmation', 'disconfirmation', 'sequence_closer', 'hold_request']",1
+"['repair_initiator', 'greeting', 'confirmation']",1
+"['repair_initiator', 'confirmation', 'partial_request', 'partial_request']",1
+"['greeting', 'hold_request']",1
+"['repair_initiator', 'confirmation', 'sequence_closer']",1
+"['greeting', 'disconfirmation']",1
+"['request_summary', 'confirmation']",1
+"['hold_request', 'detail_request']",1
+"['receipt', 'partial_request']",1
+"['repair_initiator', 'confirmation', 'disconfirmation', 'detail_request']",1
+"['confirmation', 'disconfirmation', 'sequence_closer', 'partial_request', 'partial_request']",1
+['request_summary'],1
+"['repair_initiator', 'confirmation']",1
+"['request_summary', 'detail_request']",1
+"['confirmation', 'disconfirmation', 'sequence_closer']",1
