@@ -72,4 +72,4 @@ if __name__ == '__main__':
     main()
 
 #type in the terminal
-#python3 2.metrics_DA_labeling.py ./data_TM2/GOLD_and_SYNT_annotated_data.csv
+#python3 2.metrics_DA_labeling.py ./data_TM2/GOLD_and_SYNT_annotated_data.csv <<<<this file does not yet contain the addition of speaker as prefix to DA_label. Maybe need to adjust gold labels and rerun
