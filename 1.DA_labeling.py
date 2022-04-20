@@ -14,7 +14,7 @@ def da_indicators(df):
     df['speaker'] =  np.where(temp.str.contains('USER'), "U", 'A')
     # df['speaker'].unique()
 
-    greeting = [' hi','hi.','hello','yo ', 'hey', 'How can I help you?'] 
+    greeting = [' hi,','hi.','hello','yo ', 'hey', 'How can I help you?'] 
     repair_initiator = ['Could you please repeat','Can you repeat','Could you say that again?','say again','what did you say','what else did you say?','I can\'t hear you.','repeat please','you said','sorry?','what do you mean?']
     request_summary = [' correct?','confirm']  
     confirmation = ['yes',' correct.',' correct ', 'that\'s it', 'indeed', 'yeah', 'that\'s right', 'you got it', 'yep', 'sure', 'okay', 'all right',  'sure', 'sounds good', 'super.', 'super!', 'alright', 'I don\'t mind', 'I can help you', 'sounds really good', 'got it.'] 
