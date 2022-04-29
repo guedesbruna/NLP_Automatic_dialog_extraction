@@ -27,6 +27,8 @@ def manual_inspection(i, df, hmm_seq, unique_ids):### Manual Inspection
 
 ### AUX FUNCT
 def count_and_order_seq(all_da_seq):
+
+    print(all_da_seq)
     seq_counts = {}
 
     for seq in all_da_seq:
@@ -38,7 +40,7 @@ def count_and_order_seq(all_da_seq):
     return sorted_d
 
 
-def sorted_seq_and_counts(hmm_seq):
+def sorted_seq_and_counts_hmm(hmm_seq):
 
     all_da_seq = []
     all_hid_seq = []
@@ -82,31 +84,50 @@ def sorted_seq_and_counts(hmm_seq):
     print('maximum len: '+ str(max_len))
     print('counts of number of sequences of each len (ranking): ' + str(seq_sizes))   #(sorted(seq_sizes.items(), key=operator.itemgetter(1),reverse=True)))
 
-    return sorted_d, seq_sizes, seq_to_plot ###save sorted_d in json/pickle
+    return sorted_d, seq_sizes, seq_to_plot 
+
+def sorted_seq_and_counts(da_seq):
+
+    sorted_d = count_and_order_seq(da_seq)
+
+    seq_to_plot = []
+
+    for key, value in sorted_d.items():
+        seq_to_plot.append(key.split(' '))
+        
+    max_len = len(max(seq_to_plot, key=len))
+    min_len = len(min(seq_to_plot, key=len))
+
+    seq_sizes = {}
+
+    for seq in seq_to_plot:
+        for leng in range(max_len):
+            if len(seq) == leng:
+                seq_sizes[leng] = seq_sizes[leng] + sorted_d.get(' '.join(seq)) if leng in seq_sizes else sorted_d.get(' '.join(seq))
+
+    # seq_sizes = sorted(seq_sizes.items(), key=operator.itemgetter(1),reverse=True)
+
+    print('minimum len: '+ str(min_len))
+    print('maximum len: '+ str(max_len))
+    print('counts of number of sequences of each len (ranking): ' + str(seq_sizes))   #(sorted(seq_sizes.items(), key=operator.itemgetter(1),reverse=True)))
+
+    return sorted_d, seq_sizes, seq_to_plot 
 
 
 
-# # #to see only sequences of specific len I can use the below:
-# # for e, seq in enumerate(seq_to_plot):
-# #     if len(seq) ==10:
-# #         print(seq, sorted_d.get(' '.join(seq)))
-
-
-
-##### FAZER FUNCAO AQUI, VOU USAR O MESMO PRAS BASELINES
-def plot_literal_count_per_seq(seq_sizes):
+def plot_literal_count_per_seq(seq_sizes, model_name):
     names = list(seq_sizes.keys())
     values = list(seq_sizes.values())
 
     plt.bar(range(len(seq_sizes)), values, tick_label=names)
-    plt.savefig('plot_literal_count_per_seq.png')
+    plt.savefig('./generated_files/plot_literal_count_per_seq_'+ model_name + '.png')
     plt.show()
 
     # return plt.bar(range(len(seq_sizes)), values, tick_label=names)
 
 
-##### FAZER FUNCAO AQUI, VOU USAR O MESMO PRAS BASELINES
-def plot_grouped_per_len_seq(sorted_d, seq_to_plot):
+
+def plot_grouped_per_len_seq(sorted_d, seq_to_plot, model_name):
     
     #isso seria pra plotear todos os elementos do dict
     sorted_names = list(sorted_d.keys())
@@ -130,50 +151,13 @@ def plot_grouped_per_len_seq(sorted_d, seq_to_plot):
     print('number of sequences with less than 500 counts and their length: ')
     print(df_plot['seq_len'].loc[df_plot['values'] < 500].value_counts())
 
-    ##### FAZER FUNCAO AQUI, VOU USAR O MESMO PRAS BASELINES
     print(df_plot['seq_len'].max())
     print(df_plot['seq_len'].min())
     print('mean len: '+ str(df_plot['seq_len'].mean()))
     
     fig, ax = plt.subplots()
     df_plot.hist('seq_len', ax=ax)
-    fig.savefig('hist.png')
+    fig.savefig('./generated_files/hist_'+ model_name + '.png')
     
 
 
-def main(argv=None):
-    
-    #For picking up commandline arguments
-    if argv is None:
-        argv = sys.argv
-
-    df = pd.read_csv(argv[1], index_col=0) #pd.read_csv('./data_TM2/processed/processed_utterances_sentence_DA_labeling.csv', index_col=0)
-
-    #open files i'll need
-    a_file = open("hmm_results.pkl", "rb")
-    hmm_seq = pickle.load(a_file)
-
-    sec_file = open("input_hmm.pkl", "rb")
-    input_hmm = pickle.load(sec_file)
-    unique_ids = input_hmm.get('unique_ids') # same as input_hmm['unique_ids']
-
-    i = 10
-    inspection_df = manual_inspection(i, df, hmm_seq, unique_ids)
-    sorted_d, seq_sizes, seq_to_plot = sorted_seq_and_counts(hmm_seq)
-    plot_literal_count_per_seq(seq_sizes)
-    plot_len_grouped = plot_grouped_per_len_seq(sorted_d, seq_to_plot)
-    
-    #save new results to file
-    with open('sorted_hmm_dict.pkl', 'wb') as fp:
-        pickle.dump(sorted_d, fp)
-    
-    print('done!')
-
-
-
-if __name__ == '__main__':
-    main()
-
-
-#type in terminal:
-#python3 statistics_and_plot.py './data_TM2/processed/processed_utterances_sentence_DA_labeling.csv'

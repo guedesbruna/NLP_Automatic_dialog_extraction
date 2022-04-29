@@ -5,6 +5,7 @@ from collections import Counter
 import statistics
 import pickle
 import sys
+from statistics_and_plot import manual_inspection, sorted_seq_and_counts_hmm, plot_literal_count_per_seq, plot_grouped_per_len_seq
 
 
 def viterbi(obs, states, start_p, trans_p, emit_p, emit_p_bi, emit_p_tri): 
@@ -21,7 +22,7 @@ def viterbi(obs, states, start_p, trans_p, emit_p, emit_p_bi, emit_p_tri):
 
 
     # Run Viterbi when t > 1
-    for t in range(2, len(obs)-2): #in my example len(obs)=32. i.e: range 2, 31 inclusive
+    for t in range(2, len(obs)-2): 
         V.append({})
         for st in states: #New and Current            
             max_tr_prob = V[t - 1] [states[0]] ["prob"] * trans_p[states[0]] [st] #0.026402178674778336*0.1 and same*0.9 ######### NEW
@@ -123,17 +124,32 @@ def main(argv=None):
     #For picking up commandline arguments
     if argv is None:
         argv = sys.argv
+    
+    df = pd.read_csv(argv[1], index_col=0) #pd.read_csv('./data_TM2/processed/processed_utterances_sentence_DA_labeling.csv', index_col=0)
 
-    a_file = open("input_hmm.pkl", "rb")
+    model_name = 'HMM'
+
+    a_file = open("./generated_files/input_hmm.pkl", "rb")
     input_hmm = pickle.load(a_file)
+    unique_ids = input_hmm.get('unique_ids') # same as input_hmm['unique_ids']
 
     hmm_seq, count = all_dialog_hmm(input_hmm['unigram'], input_hmm['uni'], input_hmm['bi_fut'], input_hmm['bi_past'], input_hmm['tri_fut'], input_hmm['tri_past'])
     print('Count of dialogues that failed and went to exception: ' + str(count))
 
-    # hmm_results = {'hmm_seq':hmm_seq, 'count':count} ### see what else do i need to store
+    i = 10
+    inspection_df = manual_inspection(i, df, hmm_seq, unique_ids)
+
+    sorted_d, seq_sizes, seq_to_plot = sorted_seq_and_counts_hmm(hmm_seq)
+    plot_literal_count_per_seq(seq_sizes, model_name)
+    plot_len_grouped = plot_grouped_per_len_seq(sorted_d, seq_to_plot, model_name)
     
-    with open('hmm_results.pkl', 'wb') as fp:
-        pickle.dump(hmm_seq, fp)
+    #save new results to file
+    with open('./generated_files/sorted_dict_'+ model_name+'.pkl', 'wb') as fp:
+        pickle.dump(sorted_d, fp)
+
+    
+    with open('./generated_files/hmm_results.pkl', 'wb') as f:
+        pickle.dump(hmm_seq, f)
     
     print('done!')
 
@@ -144,4 +160,4 @@ if __name__ == '__main__':
 
 
 #type in terminal:
-#python3 HMM.py
+#python3 HMM.py '../data_TM2/processed/processed_utterances_sentence_DA_labeling.csv'
