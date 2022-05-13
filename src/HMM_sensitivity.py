@@ -79,15 +79,15 @@ def dptable(V):
 
 
 
-def inputs_hmm(uni, bi_fut, bi_past, tri_fut, tri_past):
+def inputs_hmm(uni, bi_fut, bi_past, tri_fut, tri_past, cur):
 
     states = ['New', 'Current']
     start_p = {'New':0.9999,'Current':0.0001}
 
-    Cur = 0.62 #+1e-70
-    Ne = 1 - Cur
+    # Cur = 0.62 #+1e-70
+    Ne = 1 - cur
 
-    trans_p = {'New': {'New':0.1,'Current':0.9}, 'Current': {'New': Ne,'Current':Cur}} #the higher current, more it appears. 0.6 too litle, 0.7 too much
+    trans_p = {'New': {'New':0.1,'Current':0.9}, 'Current': {'New': Ne,'Current':cur}} #the higher current, more it appears. 0.6 too litle, 0.7 too much
     emit_uni = {}
     emit_bi = {}
     emit_tri = {}
@@ -102,8 +102,8 @@ def inputs_hmm(uni, bi_fut, bi_past, tri_fut, tri_past):
     return states, start_p, trans_p, emit_uni, emit_bi, emit_tri
 
 
-def all_dialog_hmm(unigram, uni, bi_fut, bi_past, tri_fut, tri_past):
-    states, start_p, trans_p, emit_uni, emit_bi, emit_tri = inputs_hmm(uni, bi_fut, bi_past, tri_fut, tri_past)
+def all_dialog_hmm(unigram, uni, bi_fut, bi_past, tri_fut, tri_past, cur_st):
+    states, start_p, trans_p, emit_uni, emit_bi, emit_tri = inputs_hmm(uni, bi_fut, bi_past, tri_fut, tri_past, cur_st)
 
     hmm_seq = []
     count = 0
@@ -119,40 +119,67 @@ def all_dialog_hmm(unigram, uni, bi_fut, bi_past, tri_fut, tri_past):
     return hmm_seq, count
 
 
-def main(argv=None):
+#AUX FUNCT
+def append_value(dict_obj, key, value):
+    if key in dict_obj:
+        # Key exist in dict. Check if type of value of key is list or not
+        if not isinstance(dict_obj[key], list):
+            # If type is not list then make it list
+            dict_obj[key] = [dict_obj[key]]
+        # Append the value in list
+        dict_obj[key].append(value)
+    else: # As key is not in dict, add key-value pair
+        dict_obj[key] = value
+
+def sensitivity(unigram, uni, bi_fut, bi_past, tri_fut, tri_past):
     
-    #For picking up commandline arguments
-    if argv is None:
-        argv = sys.argv
-    
-    df = pd.read_csv(argv[1], index_col=0)
+    hmm_seq_range = {}
+
+    for st_value in np.arange(0.1, 1.0, 0.05):
+
+        hmm_seq, count = all_dialog_hmm(unigram, uni, bi_fut, bi_past, tri_fut, tri_past, st_value) 
+        hmm_seq_range[str(round(st_value, 3))] = hmm_seq
+        
+        count_n_patterns_per_dial = [] #n of patterns per dialog. unique list, each element is number of patterns per dialog
+        count_len_patterns = [] #len of patterns for full dataset. unique list, each element is len of one pattern, does not distinguish per dialog
+
+        for i in range(len(hmm_seq)):
+            indices = [index for index, element in enumerate(hmm_seq[i][1]) if element == 'New']
+            count_n_patterns_per_dial.append(len(indices))
+            leng = len(hmm_seq[i][1])
+            for e in range(len(indices)-1):
+                count_len_patterns.append(indices[e+1]-indices[e]) #subtract index of next new minus current new to see size of pattern
+
+        
+        append_value(hmm_seq_range, 'mean_n_patterns_per_dialog', np.mean(count_n_patterns_per_dial)) #literal mean
+        append_value(hmm_seq_range, 'norm_mean_n_patterns_per_dialog', np.mean(count_n_patterns_per_dial)/leng) #normalized dividing by size of dialog
+        append_value(hmm_seq_range, 'max_n_patters', np.max(count_n_patterns_per_dial))
+        append_value(hmm_seq_range, 'min_n_patters', np.min(count_n_patterns_per_dial))
+        append_value(hmm_seq_range, 'var_n_patters', np.var(count_n_patterns_per_dial))
+
+        append_value(hmm_seq_range, 'mean_len_patterns', np.mean(count_len_patterns))
+        append_value(hmm_seq_range, 'norm_mean_len_patterns', np.mean(count_len_patterns)/leng) #normalized dividing by size of dialog
+
+    return hmm_seq_range
+
+
+def main():
 
     model_name = 'HMM'
 
     a_file = open("./generated_files/input_hmm.pkl", "rb")
     input_hmm = pickle.load(a_file)
     unique_ids = input_hmm.get('unique_ids') # same as input_hmm['unique_ids']
+    unigram = input_hmm.get('unigram')
+    print(len(unigram))
 
-    hmm_seq, count = all_dialog_hmm(input_hmm['unigram'], input_hmm['uni'], input_hmm['bi_fut'], input_hmm['bi_past'], input_hmm['tri_fut'], input_hmm['tri_past'])
-    print('Count of dialogues that failed and went to exception: ' + str(count))
-
-    i = 10
-    inspection_df = manual_inspection(i, df, hmm_seq, unique_ids)
-
-    sorted_d, seq_sizes, seq_to_plot = sorted_seq_and_counts_hmm(hmm_seq)
-    plot_literal_count_per_seq(seq_sizes, model_name)
-    plot_len_grouped = plot_grouped_per_len_seq(sorted_d, seq_to_plot, model_name)
+    hmm_seq_range = sensitivity(unigram, input_hmm['uni'], input_hmm['bi_fut'], input_hmm['bi_past'], input_hmm['tri_fut'], input_hmm['tri_past'])
     
     #save new results to file
-    with open('./generated_files/sorted_dict_'+ model_name+'.pkl', 'wb') as fp:
-        pickle.dump(sorted_d, fp)
+    with open('./generated_files/dict_sensitivity_change_prob_matrix_'+ model_name +'.pkl', 'wb') as fp:
+        pickle.dump(hmm_seq_range, fp)
 
-    
-    with open('./generated_files/hmm_results.pkl', 'wb') as f:
-        pickle.dump(hmm_seq, f)
-    
     print('done!')
-
 
 
 if __name__ == '__main__':
@@ -160,4 +187,4 @@ if __name__ == '__main__':
 
 
 #type in terminal:
-#python3 HMM.py '../data_TM2/processed/processed_utterances_sentence_DA_labeling.csv'
+#python3 HMM_sensitivity.py 

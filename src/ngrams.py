@@ -332,7 +332,7 @@ def main(argv=None):
 
     # what i need: unigram, uni, bi_fut, bi_past, tri_fut, tri_past
 
-    with open('input_hmm.pkl', 'wb') as fp:
+    with open('./generated_files/input_hmm.pkl', 'wb') as fp:
         pickle.dump(input_hmm, fp)
 
 
@@ -344,4 +344,4 @@ if __name__ == '__main__':
 
 
 #type in terminal:
-#python3 ngrams.py './data_TM2/processed/processed_utterances_sentence_DA_labeling.csv'
+#python3 ngrams.py '../data_TM2/processed/processed_utterances_sentence_DA_labeling.csv'

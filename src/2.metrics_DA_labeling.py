@@ -13,22 +13,19 @@ def metrics_DA_labeling(df):
     Input is the dataframe with binary gold labels and binary syntethical labels'''
     
     #sanity check that columns of gold and synt are aligned:
+    print(df.columns[9])
+    print(df.columns[9+12])
 
-    print(df.columns[20])
-    print(df.columns[20+14])
-
-    # df.iloc[:,[9,23]]
-
-    DA = ['repair_initiator','greeting','request_summary','confirmation','receipt','disconfirmation',
-        'sequence_closer','completion_check','hold_request','partial_request', 'detail_request', 'grant', 'answer'] 
+    DA = ['repair_initiator','greeting','confirmation','receipt','disconfirmation','sequence_closer','completion_check','hold_request','partial_request', 'detail_request', 'grant', 'answer'] 
     kappa = []
     prec_rec_f1 = []
     count_g = []
     count_s = []
 
-    for e,i in enumerate(range(9,22)):
+
+    for e, i in enumerate(range(9,21)):
         gold = np.asarray([0 if val != DA[e] else 1 for val in df.iloc[:, i]])
-        synt = np.asarray([0 if val != DA[e] else 1 for val in df.iloc[:, (i+14)]])
+        synt = np.asarray([0 if val != DA[e] else 1 for val in df.iloc[:, (i+12)]])
         kappa.append(cohen_kappa_score(gold, synt))
         prec_rec_f1.append(precision_recall_fscore_support(gold, synt, average='macro', zero_division=0))
         unique_g, counts_g = np.unique(gold, return_counts=True)
@@ -64,7 +61,7 @@ def main(argv=None):
 
     metrics = metrics_DA_labeling(df)
 
-    metrics.to_csv('./statistics_on_DA_labeling/metrics_DA_labeling.csv')
+    metrics.to_csv('../statistics_on_DA_labeling/metrics_DA_labeling_6may.csv')
     print('done!')
     return metrics
 
@@ -72,4 +69,4 @@ if __name__ == '__main__':
     main()
 
 #type in the terminal
-#python3 2.metrics_DA_labeling.py ./data_TM2/GOLD_and_SYNT_annotated_data.csv <<<<this file does not yet contain the addition of speaker as prefix to DA_label. Maybe need to adjust gold labels and rerun
+#python3 2.metrics_DA_labeling.py ../data_TM2/processed/GOLD_and_SYNT_annotated_data_6may.csv <<<<this file does not yet contain the addition of speaker as prefix to DA_label.

@@ -16,9 +16,9 @@ def da_indicators(df):
 
     greeting = [' hi,','hi.','hello','yo ', 'hey', 'How can I help you?'] 
     repair_initiator = ['Could you please repeat','Can you repeat','Could you say that again?','say again','what did you say','what else did you say?','I can\'t hear you.','repeat please','you said','sorry?','what do you mean?']
-    # request_summary = [' correct?','confirm']  
+    request_summary = [' correct?','confirm']  
     confirmation = ['yes',' correct.',' correct ', 'that\'s it', 'indeed', 'yeah', 'that\'s right', 'you got it', 'yep', 'sure', 'okay', 'all right',  'sure', 'sounds good', 'super.', 'super!', 'alright', 'I don\'t mind', 'I can help you', 'sounds really good', 'got it.'] 
-    sequence_closer = ['awesome','great','perfect','exactly','that\'s all','that is all', 'thanks', 'thank you', 'pleasure', 'excellent',  'excellent', 'too bad', 'oh well', 'have a good day', 'enjoy', 'until next time', 'good day', 'good luck', 'bye', 'til next time'] #'okay',
+    sequence_closer = ['awesome','great','perfect','exactly','that\'s all','that is all', 'thanks', 'thank you', 'pleasure', 'excellent', 'excellent', 'too bad', 'oh well', 'have a good day', 'enjoy', 'until next time', 'good day', 'good luck', 'bye', 'til next time'] #'okay'
     receipt = ['You are welcome', 'you\'re welcome']
     disconfirmation = [' no ', 'wrong', 'incorrect', 'not really']
     completion_check = ['is that all?','anything else I can help you with?', 'anything else?'] 
@@ -30,19 +30,19 @@ def da_indicators(df):
 
     #choose if i'll deal with whole iterances or them split
 
-    df['DA_rep_init'] =  np.where(temp2.str.contains('|'.join(repair_initiator), case=False), df.speaker+"_repair_initiator", '')
-    df['DA_greet'] =  np.where(temp2.str.contains('|'.join(greeting), case=False), df.speaker+"_greeting", '')
+    df['DA_rep_init'] =  np.where(temp2.str.contains('|'.join(repair_initiator), case=False), "repair_initiator", '')
+    df['DA_greet'] =  np.where(temp2.str.contains('|'.join(greeting), case=False), "greeting", '')
     # df['DA_req_sum'] =  np.where(temp2.str.contains('|'.join(request_summary), case=False), df.speaker+"_request_summary", '')
-    df['DA_conf'] =  np.where(temp2.str.contains('|'.join(confirmation), case=False), df.speaker+"_confirmation", '')
-    df['DA_receipt'] =  np.where(temp2.str.contains('|'.join(receipt), case=False), df.speaker+"_receipt", '')
-    df['DA_disconf'] =  np.where(temp2.str.contains('|'.join(disconfirmation), case=False), df.speaker+"_disconfirmation", '')
-    df['DA_closer'] =  np.where(temp2.str.contains('|'.join(sequence_closer), case=False), df.speaker+"_sequence_closer", '')           
-    df['DA_comp_check'] =  np.where(temp2.str.contains('|'.join(completion_check), case=False),  df.speaker+"_completion_check", '')
-    df['DA_hold'] =  np.where(temp2.str.contains('|'.join(hold_request), case=False),  df.speaker+"_hold_request", '')
-    df['DA_partial_req'] = np.where(((df['speaker'] == 'U') & temp2.str.contains('|'.join(partial_request), case=False)), df.speaker+'_partial_request', '')
-    df['DA_detail_req'] = np.where(((df['speaker'] == 'A') & temp2.str.contains('|'.join(detail_request), case=False)), df.speaker+'_detail_request', '')
-    df['DA_grant'] = np.where(((df['speaker'] == 'A') & (temp2.str.contains('|'.join(grant_answer), case=False) & (df['DA_partial_req'].shift(1) == 'U_partial_request') )), df.speaker+'_grant', '')                                     
-    df['DA_answer'] = np.where(((df['speaker'] == 'U') & (temp2.str.contains('|'.join(grant_answer), case=False) & (df['DA_detail_req'].shift(1) == 'A_detail_request') )), df.speaker+'_answer', '')                                     
+    df['DA_conf'] =  np.where(temp2.str.contains('|'.join(confirmation), case=False), "confirmation", '')
+    df['DA_receipt'] =  np.where(temp2.str.contains('|'.join(receipt), case=False), "receipt", '')
+    df['DA_disconf'] =  np.where(temp2.str.contains('|'.join(disconfirmation), case=False), "disconfirmation", '')
+    df['DA_closer'] =  np.where(temp2.str.contains('|'.join(sequence_closer), case=False), "sequence_closer", '')           
+    df['DA_comp_check'] =  np.where(temp2.str.contains('|'.join(completion_check), case=False),  "completion_check", '')
+    df['DA_hold'] =  np.where(temp2.str.contains('|'.join(hold_request), case=False),  "hold_request", '')
+    df['DA_partial_req'] = np.where(((df['speaker'] == 'U') & temp2.str.contains('|'.join(partial_request), case=False)), 'partial_request', '')
+    df['DA_detail_req'] = np.where(((df['speaker'] == 'A') & temp2.str.contains('|'.join(detail_request), case=False)), 'detail_request', '')
+    df['DA_grant'] = np.where(((df['speaker'] == 'A') & (temp2.str.contains('|'.join(grant_answer), case=False) & (df['DA_partial_req'].shift(1) == 'partial_request') )), 'grant', '')                                     
+    df['DA_answer'] = np.where(((df['speaker'] == 'U') & (temp2.str.contains('|'.join(grant_answer), case=False) & (df['DA_detail_req'].shift(1) == 'detail_request') )), 'answer', '')                                     
 
     # df['all_DA'] = df[['DA_rep_init', 'DA_greet','DA_req_sum', 'DA_conf', 'DA_receipt', 'DA_disconf', 'DA_closer', 'DA_comp_check', 'DA_hold', 'DA_partial_req', 'DA_detail_req', 'DA_grant', 'DA_answer']].agg(' '.join, axis=1)
     df['all_DA'] = df[['DA_rep_init', 'DA_greet', 'DA_conf', 'DA_receipt', 'DA_disconf', 'DA_closer', 'DA_comp_check', 'DA_hold', 'DA_partial_req', 'DA_detail_req', 'DA_grant', 'DA_answer']].agg(' '.join, axis=1)
@@ -50,10 +50,10 @@ def da_indicators(df):
 
     df['all_DA'] = [word_tokenize(da) for da in df['all_DA']]
 
-    df.loc[:, ['speaker', 'new_text', 'all_DA']].to_csv('../statistics_on_DA_labeling/analysis_multiple_DA_cases_3rditeration_full_dataset.csv')
+    df.loc[:, ['speaker', 'new_text', 'all_DA']].to_csv('analysis_multiple_DA_cases_3rditeration.csv')
     counts = df['all_DA'].value_counts()
 
-    counts.to_csv('../statistics_on_DA_labeling/count_overlaping_DAs_3iteration_full_dataset.csv')
+    counts.to_csv('count_overlaping_DAs_3iteration.csv')
     # data = {'counts':counts}
     # df_counts = pd.DataFrame(data)
 
@@ -78,7 +78,7 @@ def main(argv=None):
     # df_sent = sentence_ut(df)
     df_final = da_indicators(df)
 
-    df_final.to_csv('../data_TM2/processed/processed_utterances_sentence_DA_labeling.csv') #<< for whole dataset
+    df_final.to_csv('../data_TM2/processed/GOLD_and_SYNT_annotated_data_6may.csv') #<< for labeling gold sample
     print('done!')
     return df_final
 
@@ -86,4 +86,4 @@ if __name__ == '__main__':
     main()
 
 #type in the terminal
-#python3 1.DA_labeling.py ../data_TM2/processed/processed_utterances_all_tasks.csv <<< for whole dataset
+#python3 1.DA_labeling_sample_only.py ../data_TM2/sample/sample_b1_goldannotated_noAutomaticLabels.csv <<< for labeling Gold sample
