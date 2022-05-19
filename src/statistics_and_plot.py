@@ -28,7 +28,7 @@ def manual_inspection(i, df, hmm_seq, unique_ids):### Manual Inspection
 ### AUX FUNCT
 def count_and_order_seq(all_da_seq):
 
-    print(all_da_seq)
+    # print(all_da_seq)
     seq_counts = {}
 
     for seq in all_da_seq:

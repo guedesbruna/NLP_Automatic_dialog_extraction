@@ -126,36 +126,36 @@ def ngrams_lm(full_DA):
     return unigram, ngrams_all, ngrams_prob, tokenized_sent #unigram, bigram, trigram, fourgram
 
 
+#not predicting
+# def ngram_prediction(tokenized_sent, ngrams_prob):
+#     ''' Calculates probability of unseen sequences
+#     Outputs a dict with predictions and a the ngram probability dict updated with probabilities of unseen sequences.'''
 
-def ngram_prediction(tokenized_sent, ngrams_prob):
-    ''' Calculates probability of unseen sequences
-    Outputs a dict with predictions and a the ngram probability dict updated with probabilities of unseen sequences.'''
+#     ngram = {1:[], 2:[], 3:[]}#to store n-grams formed from the strings
 
-    ngram = {1:[], 2:[], 3:[]}#to store n-grams formed from the strings
-
-    for i in range(1, 4):
-        ngram[i] = list(ngrams(tokenized_sent, i))[-1]
+#     for i in range(1, 4):
+#         ngram[i] = list(ngrams(tokenized_sent, i))[-1]
     
-    print("String: ", ngram)
+#     print("String: ", ngram)
     
-    for j in range(4):
-        ngrams_prob[j+1] = sorted(ngrams_prob[j+1], key = lambda x:x[1], reverse = True)
+#     for j in range(4):
+#         ngrams_prob[j+1] = sorted(ngrams_prob[j+1], key = lambda x:x[1], reverse = True)
     
-    pred = {1:[], 2:[], 3:[]}
-    for k in range(3):
-        count = 0
-        for each in ngrams_prob[k+2]:
-            if each[0][:-1] == ngram[k+1]:#to find predictions based on highest probability of n-grams                   
-                count +=1
-                pred[k+1].append(each[0][-1])
-                if count ==5:
-                    break
-        if count<5:
-            while(count!=5):
-                pred[k+1].append("NA")#if no word prediction is found, replace with NOT FOUND
-                count +=1
+#     pred = {1:[], 2:[], 3:[]}
+#     for k in range(3):
+#         count = 0
+#         for each in ngrams_prob[k+2]:
+#             if each[0][:-1] == ngram[k+1]:#to find predictions based on highest probability of n-grams                   
+#                 count +=1
+#                 pred[k+1].append(each[0][-1])
+#                 if count ==5:
+#                     break
+#         if count<5:
+#             while(count!=5):
+#                 pred[k+1].append("NA")#if no word prediction is found, replace with NOT FOUND
+#                 count +=1
                 
-    return pred, ngrams_prob
+#     return pred, ngrams_prob
 
 
 ### METRICS SCRIPT? 

@@ -84,7 +84,7 @@ def inputs_hmm(uni, bi_fut, bi_past, tri_fut, tri_past):
     states = ['New', 'Current']
     start_p = {'New':0.9999,'Current':0.0001}
 
-    Cur = 0.62 #+1e-70
+    Cur = 0.62 #0.62
     Ne = 1 - Cur
 
     trans_p = {'New': {'New':0.1,'Current':0.9}, 'Current': {'New': Ne,'Current':Cur}} #the higher current, more it appears. 0.6 too litle, 0.7 too much
@@ -146,6 +146,9 @@ def main(argv=None):
     #save new results to file
     with open('./generated_files/sorted_dict_'+ model_name+'.pkl', 'wb') as fp:
         pickle.dump(sorted_d, fp)
+
+    with open('./generated_files/seq_to_plot_'+ model_name+'.pkl', 'wb') as g:
+        pickle.dump(seq_to_plot, g)
 
     
     with open('./generated_files/hmm_results.pkl', 'wb') as f:
