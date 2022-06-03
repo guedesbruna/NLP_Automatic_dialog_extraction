@@ -144,6 +144,9 @@ def main(argv=None):
 
         with open('./generated_files/sorted_dict_'+ model + '.pkl', 'wb') as f:
             pickle.dump(sorted_d, f)
+        
+        with open('./generated_files/seq_to_plot_'+ model + '.pkl', 'wb') as g:
+            pickle.dump(seq_to_plot, g)
 
 
 

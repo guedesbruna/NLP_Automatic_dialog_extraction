@@ -1,0 +1,58 @@
+figure.figsize: 3, 2
+figure.dpi: 250
+
+font.size: 5.
+font.family: Arial
+mathtext.fontset: cm
+
+legend.frameon: False
+legend.numpoints: 1
+legend.scatterpoints: 1
+legend.loc: best
+legend.fontsize: medium
+
+# started from Seaborn deep palette, but with blue-red-green instead of blue-green-red,
+# one extra color and one small change
+axes.prop_cycle: cycler('color', ['4C72B0', 'C44E52', '55A868', '9467BD', 'E56E00', '64B5CD', 'CCB974', 'E377C2', '8C564B', '7F7F7F'])
+image.cmap: viridis
+image.interpolation: none
+
+patch.linewidth: 0.25
+patch.linewidth: 0.5
+patch.facecolor: 348ABD  # blue
+patch.edgecolor: EEEEEE
+patch.antialiased: True
+
+lines.linewidth: 1.
+lines.markersize: 3.
+lines.markeredgewidth: 0
+lines.solid_capstyle: round
+
+grid.linestyle: -
+grid.linewidth: 0.5
+grid.color: white
+grid.linestyle: -    # solid line
+
+figure.facecolor: white
+figure.edgecolor: 0.50
+
+axes.axisbelow: True
+axes.edgecolor: .15
+axes.linewidth: 0.75
+
+xtick.direction: in
+ytick.direction: in
+
+xtick.major.size: 3
+ytick.major.size: 3
+xtick.minor.size: 1.5
+ytick.minor.size: 1.5
+
+xtick.major.width: 0.5
+ytick.major.width: 0.5
+xtick.minor.width: .25
+ytick.minor.width: .25
+
+xtick.major.pad: 3
+ytick.major.pad: 3
+
